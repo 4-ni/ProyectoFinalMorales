@@ -3,8 +3,8 @@
 // Product data persisted via localStorage
 let products = JSON.parse(localStorage.getItem("products")) || [
   { id: 1, name: "Laptop", price: 1000, stock: 5 },
-  { id: 2, name: "Phone", price: 600, stock: 10 },
-  { id: 3, name: "Headphones", price: 100, stock: 15 }
+  { id: 2, name: "IPhone", price: 600, stock: 10 },
+  { id: 3, name: "Audífonos", price: 100, stock: 15 }
 ];
 
 function saveProducts() {
