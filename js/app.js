@@ -1,6 +1,4 @@
-// E-commerce simulator upgraded to support full HTML structure
-
-// Product data persisted via localStorage
+// Datos de productos persistidos en localStorage
 let products = JSON.parse(localStorage.getItem("products")) || [
   { id: 1, name: "Laptop", price: 1000, stock: 5 },
   { id: 2, name: "IPhone", price: 600, stock: 10 },
@@ -11,19 +9,19 @@ function saveProducts() {
   localStorage.setItem("products", JSON.stringify(products));
 }
 
-// Cart persisted via localStorage
+// Carrito persistido en localStorage
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 function saveCart() {
   localStorage.setItem("cart", JSON.stringify(cart));
 }
 
-// Orders
+// Órdenes persistidas en localStorage
 let orders = JSON.parse(localStorage.getItem("orders")) || [];
 function saveOrders() {
   localStorage.setItem("orders", JSON.stringify(orders));
 }
 
-// Render product list
+// Renderizado de catálogo de productos
 function renderCatalog(filterText = "") {
   const lista = document.getElementById("listaProductos");
   lista.innerHTML = "";
@@ -31,7 +29,7 @@ function renderCatalog(filterText = "") {
     p.name.toLowerCase().includes(filterText.toLowerCase())
   );
   if (filtered.length === 0) {
-    lista.innerHTML = "<li class='muted'>No matches</li>";
+    lista.innerHTML = "<li class='muted'>No hay coincidencias</li>";
     return;
   }
   filtered.forEach(prod => {
@@ -44,7 +42,7 @@ function renderCatalog(filterText = "") {
   });
 }
 
-// Render cart
+// Renderizado del carrito
 function renderCart() {
   const cuerpo = document.getElementById("cuerpoCarrito");
   const tabla = document.getElementById("tablaCarrito");
@@ -78,7 +76,7 @@ function renderCart() {
   totalEl.textContent = "$" + total;
 }
 
-// Render orders
+// Renderizado de órdenes
 function renderOrders() {
   const lista = document.getElementById("listaOrdenes");
   lista.innerHTML = "";
@@ -93,7 +91,7 @@ function renderOrders() {
   });
 }
 
-// Add to cart
+// Agregar producto al carrito
 function addToCart(productId) {
   const product = products.find(p => p.id === productId);
   if (!product || product.stock <= 0) {
@@ -114,7 +112,7 @@ function addToCart(productId) {
   renderCart();
 }
 
-// Remove from cart
+// Eliminar producto del carrito
 function removeFromCart(productId) {
   const idx = cart.findIndex(c => c.id === productId);
   if (idx > -1) {
@@ -148,7 +146,7 @@ document.getElementById("btnComprar").addEventListener("click", () => {
   Swal.fire("Éxito", "Compra realizada!", "success");
 });
 
-// Agregar producto via formulario
+// Agregar producto al catálogo mediante formulario
 document.getElementById("formProducto").addEventListener("submit", e => {
   e.preventDefault();
   const nombre = document.getElementById("nombreProducto").value.trim();
@@ -165,12 +163,12 @@ document.getElementById("formProducto").addEventListener("submit", e => {
   Swal.fire("Éxito", "Producto agregado al catálogo", "success");
 });
 
-// Filtro
+// Filtrar catálogo
 document.getElementById("filtro").addEventListener("input", e => {
   renderCatalog(e.target.value);
 });
 
-// Init
+// Inicialización
 document.addEventListener("DOMContentLoaded", () => {
   renderCatalog();
   renderCart();
